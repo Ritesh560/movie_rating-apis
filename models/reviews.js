@@ -15,4 +15,4 @@ const useSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
-module.exports = History = mongoose.model("reviewsHistory", useSchema)
+module.exports = Reviews = mongoose.model("reviews", useSchema)
