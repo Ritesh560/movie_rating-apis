@@ -1,4 +1,3 @@
-const { Int32 } = require("mongodb")
 const mongoose = require("mongoose")
 
 const useSchema = new mongoose.Schema(
@@ -7,12 +6,12 @@ const useSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    review: {
-      type: Int32,
+    ratings: {
+      type: Array,
       required: true,
     },
   },
   { timestamps: true }
 )
 
-module.exports = History = mongoose.model("reviewsHistory", useSchema)
+module.exports = Movies = mongoose.model("movies", useSchema)

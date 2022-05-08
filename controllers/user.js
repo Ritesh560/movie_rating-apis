@@ -27,6 +27,8 @@ router.post("/", [check("email", "please Enter a valid email.").isEmail(), check
     user = new User({
       email,
       password,
+      name: req.body.name,
+      age: req.body.age,
     })
 
     //hashing the password
