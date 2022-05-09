@@ -13,7 +13,6 @@ const { request } = require("express")
 router.post("/", [check("email", "please Enter a valid email.").isEmail(), check("name", "Name is required.").exists(), check("age", "age is required.").exists(), check("password", "Password is required.").exists()], async (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
-    console.log(req.body)
     return res.status(400).json({ errors: errors.array() })
   }
 
@@ -50,7 +49,6 @@ router.post("/", [check("email", "please Enter a valid email.").isEmail(), check
 async function postRatings({ rev, userid }) {
   var movie = rev.movie
   var rate = rev.rating
-  console.log(rev)
 
   const review = await Reviews.findOne({ userid: userid, movie: movie })
 
@@ -64,7 +62,8 @@ async function postRatings({ rev, userid }) {
 
     var Movieobj = await Movies.findOne({ movie: movie })
     if (Movieobj) {
-      Movieobj.ratings.push(newReview.id)
+      const newReviewId = newReview.id
+      Movieobj.ratings.push({ id: newReviewId })
       Movieobj.save()
     } else {
       const newReviewid = newReview.id
