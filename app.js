@@ -21,6 +21,7 @@ app.use(cors())
 //redirecting to routers for different routes
 const router = require("./routes/router")
 app.use("/", router)
+console.log(Date.now())
 
 //starting the server for requests
 app.listen(PORT, () => {
