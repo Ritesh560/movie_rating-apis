@@ -16,7 +16,6 @@ router.get("/", [check("movie", "please Enter a movie name to search.").exists()
   const fetchMovie = req.body.movie
 
   try {
-    console.log(fetchMovie)
     const MovieArray = await Movies.find({ movie: { $regex: fetchMovie } })
 
     if (!MovieArray) {

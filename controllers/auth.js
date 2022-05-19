@@ -26,7 +26,8 @@ router.post("/", [check("email", "please Enter a valid email.").isEmail(), check
     //authenticating password
     const isMatch = await bcrypt.compare(password, user.password)
 
-    var toLock = profileLock.find(({ email }) => email == email)
+    var toLock = profileLock.find((ele) => ele.email === email)
+    console.log(toLock)
 
     if (toLock && toLock.attempts == 4) {
       if (toLock.time > Date.now()) return res.status(400).json({ errors: [{ msg: "Profile is Locked." }] })
@@ -38,7 +39,7 @@ router.post("/", [check("email", "please Enter a valid email.").isEmail(), check
     if (!isMatch) {
       if (toLock) {
         if (toLock.attempts == 3) {
-          toLock.time = Date.now() + 3000000
+          toLock.time = Date.now() + 1800000
           toLock.attempts++
           return res.status(400).json({ errors: [{ msg: "Profile is Locked." }] })
         } else {

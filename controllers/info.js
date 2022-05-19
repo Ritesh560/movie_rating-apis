@@ -31,7 +31,9 @@ router.post("/", [check("email", "please Enter a valid email.").isEmail(), check
       return res.status(400).json({ errors: [{ msg: "Invalid credentials" }] })
     }
 
-    var newvalues = { $set: { name, age } }
+    const updates = await User.updateOne({ id: user.id }, { $set: { name: name, age: age } })
+
+    User.findOneAndUpdate({ email: user.email }, { $set: { name: name, age: age } })
 
     var userid = user.id
 
